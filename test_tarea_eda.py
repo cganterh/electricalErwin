@@ -47,11 +47,15 @@ def parse_massif_file(path):
             (m.group(1), int(m.group(2)))
             for m in map(partial(match, '(.+)=(\d+)'), f)
             if m is not None
+            if m.group(1) in ('time', 'mem_heap_B',
+                              'mem_stacks_B')
         ]
 
-    time = list(
-        get_var('time', table)
-    )[-1]
+    time = next(
+        get_var(
+            'time', reversed(table)
+        )
+    )
 
     max_mem = max(
         sum(e) for e in zip(
