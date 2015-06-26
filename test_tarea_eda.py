@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
-from sys import argv as args
+from sys import argv
 from subprocess import call
 from re import match
 from functools import partial
@@ -69,7 +69,7 @@ def parse_massif_file(path):
 if __name__ == '__main__':
     call(['valgrind', '--tool=massif', '--stacks=yes',
           '--time-unit=i', '--massif-out-file=massif.out',
-          args[1]])
+          argv[1]])
 
     time, max_mem = parse_massif_file('massif.out')
 
