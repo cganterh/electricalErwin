@@ -38,6 +38,27 @@ def parse_massif_file(path):
         ...
     """
     def get_var(name, table):
+        """Yield the selected values of table.
+
+        This generator yields the second value
+        of each row of ``table`` for which the
+        first value of the row has the value
+        ``name``.
+
+        :param str name:
+            The name of the values that should
+            be yielded.
+
+        :param list table:
+            A table of the form::
+                [(name, value),
+                 (name, value),
+                 (name, value),
+                 ...]
+        :yield:
+            The values of the rows for which their
+            names are equal to the ``name `` parameter.
+        """
         for r in table:
             if r[0] == name:
                 yield r[1]
